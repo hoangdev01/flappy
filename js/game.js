@@ -14,22 +14,23 @@ class game{
 
     listenMouse(){
         this.canvas.addEventListener('click',() => {
-            if (this.bg.a == 0) this.bird.vecocity = -3;
-            else if (this.bg.a > 0) this.bg.init();
-            else if (this.bg.a < 0) this.bg.a = 0;
+            if (this.bg.checkStatus == 0) this.bird.vecocity = -3;
+            else if (this.bg.checkStatus > 0) this.bg.init();
+            else if (this.bg.checkStatus < 0) this.bg.checkStatus = 0;
         });
     }
 
     loop(){
         this.update();
         this.draw();
-        setTimeout( () => this.loop() , 1);
+        setTimeout( () => this.loop() , TIME_LOOP);
     }
 
     draw(){
 
         this.bg.draw();
         this.bird.draw();
+        
     }
 
     update(){

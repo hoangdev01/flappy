@@ -64,12 +64,12 @@ class bird{
             if(this.t <= 20 ) this.currentImg = this.imageDown;
             else if (this.t <= 40) this.currentImg = this. imageMid;
             else this.currentImg = this.imageUp;
-            if(this.y < 380 && this.game.bg.a == 0){
+            if(this.y < 380 && this.game.bg.checkStatus == 0){
                 this.vecocity += ACCELERATION;
                 this.y += this.vecocity;
                 
             }
-            else if (this.game.bg.a >= 0){
+            else if (this.game.bg.checkStatus >= 0){
                 this.gameOver();
             }
            
@@ -78,7 +78,7 @@ class bird{
     }
 
     gameOver(){
-        this.game.bg.a = 1;
+        this.game.bg.checkStatus = 1;
         this.t = 40;
     }
     
@@ -91,7 +91,7 @@ class bird{
             this.game.ctx.drawImage( this.currentImg , this.x , this.y );
         }
         // console.log(this.currentImgLoaded ,this.imageDownLoaded ,this.imageMidLoaded,this.imageUpLoaded);
-        if(this.gameOverImgLoaded && this.game.bg.a > 0){
+        if(this.gameOverImgLoaded && this.game.bg.checkStatus > 0){
             this.game.ctx.drawImage(this.gameOverImg,50,150);
         }
     }
