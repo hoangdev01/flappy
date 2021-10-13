@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="text/javascript" >
+        function preventBack(){window.history.forward();}
+         setTimeout("preventBack()", 0);
+         window.onunload=function(){null};
+     </script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +21,9 @@
         <div class="sender-column">
             <strong><a href="login2.html">ログイン</a>はこちら</strong>
         </div>
+        <div class="sender-column">
+            <a href="login.html"> Logout</a>
+        </div>
         <div class="container">  
             <form action="login.php" class="form-login" method="POST" role="form">   
         
@@ -24,13 +32,13 @@
                                     <h1> <a href="play.html">プレー</a> </h1>
                                 </button><br>
                                 <button type="submit" >
-                                    <h1>トップポイント</h1>
+                                    <h1><a href="TopPoint.html">トップポイント</a></h1>
                                 </button><br>
                                 <button type="submit" >
                                     <h1>スキン</h1>	
                                 </button><br>
                                 <button type="submit" >
-                                    <h1>ガイド</h1>
+                                    <h1><a href="Guide.html">ガイド</a></h1>
                                 </button><br>
                                 <button type="submit" >
                                     <h1>セッティング</h1>
