@@ -1,0 +1,50 @@
+:root{
+    --bg1 :#9b59b6;
+    --bg2 : #3498db;
+    --text : #26ade4;
+    
+}
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+
+}
+a{
+    text-decoration:none;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    background:  linear-gradient(to bottom right,var(--bg1),var(--bg2));
+}
+.guide-form{
+    margin-top: 60px;
+    width: 700px;
+    height: 421px;
+    background-image: url(https://user-images.githubusercontent.com/18351809/46888871-624a3900-ce7f-11e8-808e-99fd90c8a3f4.png);
+    border-radius: 10px;
+    padding: 40px 30px;
+
+}
+.context{
+    color: black;
+    margin-bottom: 20px;
+}
+.guide-play{
+    color: brown;
+}
+.last-text{
+    color: green;
+}
+.return-but{
+    margin-top: 50px;
+    margin-left: 270px;
+    height: 30px;
+    width: 200px;
+    background:  linear-gradient(to bottom right,var(--bg1),var(--bg2));
+
+}
