@@ -97,9 +97,15 @@ class bird{
             this.game.ctx.textAlign = "center"
             this.game.ctx.fillRect((BG_WIDTH-SCORE_WIDTH)/2, (BG_HEIGHT-SCORE_HEIGHT)/2, SCORE_WIDTH, SCORE_HEIGHT); // create rectangle  
             this.game.ctx.fillStyle = "white";
-            this.game.ctx.font = "bold 30px Arial";
+            this.game.ctx.font = "bold 20px Arial";
             this.game.ctx.textAlign = "center"
-            this.game.ctx.fillText('Score: ' + this.game.bg.score, BG_WIDTH/2, (BG_HEIGHT/2));
+            this.game.ctx.fillText('Score: ' + this.game.bg.score, BG_WIDTH/1.5, (BG_HEIGHT/2.25));
+            
+            this.game.ctx.textAlign = "center"
+            this.game.ctx.fillText('Best: ' + this.game.bg.score, BG_WIDTH/1.5, (BG_HEIGHT/1.75));
+
+            this.game.ctx.textAlign = "center"
+            this.game.ctx.fillText('Rank: ' + this.game.bg.score, BG_WIDTH/3.5, BG_HEIGHT/2);
         }
     }
 
