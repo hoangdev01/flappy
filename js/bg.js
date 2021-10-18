@@ -72,19 +72,17 @@ class bg {
     }
 
     update() {
-
+        if (this.checkStatus == 0) {
+            this.x -= this.backgroundSpeed;
+            this.x2 -= this.pipeSpeed;
+            for (let i = 0; i < this.xr.length; i++) {
+                this.xr[i] -= this.pipeSpeed;
+            }
+        }
     }
 
     draw() {
         if (this.baseLoaded && this.imageLoaded) {
-            if (this.checkStatus == 0) {
-                this.x -= this.backgroundSpeed;
-                this.x2 -= this.pipeSpeed;
-                for (let i = 0; i < this.xr.length; i++) {
-                    this.xr[i] -= this.pipeSpeed;
-                }
-            }
-
             // reset background 
             if (this.x <= -BG_WIDTH) this.x = 0;
             // reset nền 

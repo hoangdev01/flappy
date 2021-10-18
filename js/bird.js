@@ -92,7 +92,14 @@ class bird{
         }
         // console.log(this.currentImgLoaded ,this.imageDownLoaded ,this.imageMidLoaded,this.imageUpLoaded);
         if(this.gameOverImgLoaded && this.game.bg.checkStatus > 0){
-            this.game.ctx.drawImage(this.gameOverImg,50,150);
+            this.game.ctx.drawImage(this.gameOverImg,50,BG_HEIGHT/7);
+            this.game.ctx.fillStyle='#FCA146';    // color of fill
+            this.game.ctx.textAlign = "center"
+            this.game.ctx.fillRect((BG_WIDTH-SCORE_WIDTH)/2, (BG_HEIGHT-SCORE_HEIGHT)/2, SCORE_WIDTH, SCORE_HEIGHT); // create rectangle  
+            this.game.ctx.fillStyle = "white";
+            this.game.ctx.font = "bold 30px Arial";
+            this.game.ctx.textAlign = "center"
+            this.game.ctx.fillText('Score: ' + this.game.bg.score, BG_WIDTH/2, (BG_HEIGHT/2));
         }
     }
 

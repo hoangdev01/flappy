@@ -14,5 +14,4 @@ if (mysqli_num_rows($rs)>0){
 }else{
     echo"<h2> Sai tai khoan hoac mat khau</h2>";
 }
-
 ?>

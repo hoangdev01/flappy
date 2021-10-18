@@ -20,5 +20,8 @@ const TIME_LOOP = 1;
 
 const GROUND_Y = 400;
 
+const SCORE_HEIGHT = 150;
+const SCORE_WIDTH = 250;
+
 
 

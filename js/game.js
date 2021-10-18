@@ -27,10 +27,14 @@ class game{
     }
 
     draw(){
-
         this.bg.draw();
         this.bird.draw();
-        
+        if(this.bg.checkStatus == 0){
+            this.ctx.fillStyle = "white";
+            this.ctx.font = "bold 30px Arial";
+            this.ctx.textAlign = "center"
+            this.ctx.fillText(this.bg.score, BG_WIDTH/2, (BG_HEIGHT / 7));
+        }
     }
 
     update(){
