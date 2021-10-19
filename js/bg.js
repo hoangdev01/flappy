@@ -41,7 +41,7 @@ class bg {
         // x2 là tọa độ nền 
         this.x2 = 0;
         // nếu checkStatus = -1 thì gọi hàm init khởi động lại game, nếu như = 0 thì game đang được chơi, nếu = 1 thì gọi hàm gameover và chuyển lại -1 để restart game
-        this.checkStatus = -1;
+        this.checkStatus = START_STATUS;
         this.y = 0;
         this.r = new Array(0, 0, 0);
         this.xr = new Array(0, 0, 0);
@@ -55,7 +55,7 @@ class bg {
     }
 
     init() {
-        this.checkStatus = -1;
+        this.checkStatus = START_STATUS;
         this.current = 0;
         this.game.bird.x = BIRD_INIT_POSITION_X;
         this.game.bird.y = BIRD_INIT_POSITION_Y;
@@ -72,7 +72,7 @@ class bg {
     }
 
     update() {
-        if (this.checkStatus == 0) {
+        if (this.checkStatus == IN_GAME_STATUS) {
             this.x -= this.backgroundSpeed;
             this.x2 -= this.pipeSpeed;
             for (let i = 0; i < this.xr.length; i++) {
@@ -108,7 +108,7 @@ class bg {
             this.game.ctx.drawImage(this.base, this.x2 - 10, GROUND_Y);
             this.game.ctx.drawImage(this.base, this.x2 + BG_WIDTH - 10, GROUND_Y);
 
-            if (this.checkStatus < 0 && this.startLoaded) {
+            if (this.checkStatus == START_STATUS && this.startLoaded) {
                 this.game.ctx.drawImage(this.start, 60, 31);
             }
         }

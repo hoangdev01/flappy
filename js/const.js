@@ -23,5 +23,10 @@ const GROUND_Y = 400;
 const SCORE_HEIGHT = 150;
 const SCORE_WIDTH = 250;
 
+const START_STATUS = -1;
+const IN_GAME_STATUS = 0;
+const GAME_OVER_STATUS = 1;
+const PAUSE_STATUS = 2;
+
 
 

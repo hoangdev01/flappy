@@ -64,12 +64,11 @@ class bird{
             if(this.t <= 20 ) this.currentImg = this.imageDown;
             else if (this.t <= 40) this.currentImg = this. imageMid;
             else this.currentImg = this.imageUp;
-            if(this.y < 380 && this.game.bg.checkStatus == 0){
+            if(this.y < 380 && this.game.bg.checkStatus == IN_GAME_STATUS){
                 this.vecocity += ACCELERATION;
                 this.y += this.vecocity;
-                
             }
-            else if (this.game.bg.checkStatus >= 0){
+            else if (this.game.bg.checkStatus == GAME_OVER_STATUS){
                 this.gameOver();
             }
            
@@ -78,7 +77,7 @@ class bird{
     }
 
     gameOver(){
-        this.game.bg.checkStatus = 1;
+        this.game.bg.checkStatus = GAME_OVER_STATUS;
         this.t = 40;
     }
     
@@ -91,7 +90,7 @@ class bird{
             this.game.ctx.drawImage( this.currentImg , this.x , this.y );
         }
         // console.log(this.currentImgLoaded ,this.imageDownLoaded ,this.imageMidLoaded,this.imageUpLoaded);
-        if(this.gameOverImgLoaded && this.game.bg.checkStatus > 0){
+        if(this.gameOverImgLoaded && this.game.bg.checkStatus == GAME_OVER_STATUS){
             this.game.ctx.drawImage(this.gameOverImg,50,BG_HEIGHT/7);
             this.game.ctx.fillStyle='#FCA146';    // color of fill
             this.game.ctx.textAlign = "center"

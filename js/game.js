@@ -14,9 +14,9 @@ class game{
 
     listenMouse(){
         this.canvas.addEventListener('click',() => {
-            if (this.bg.checkStatus == 0) this.bird.vecocity = -3;
-            else if (this.bg.checkStatus > 0) this.bg.init();
-            else if (this.bg.checkStatus < 0) this.bg.checkStatus = 0;
+            if (this.bg.checkStatus == IN_GAME_STATUS) this.bird.vecocity = -3;
+            else if (this.bg.checkStatus == GAME_OVER_STATUS) this.bg.init();
+            else if (this.bg.checkStatus == START_STATUS) this.bg.checkStatus = IN_GAME_STATUS;
         });
     }
 
