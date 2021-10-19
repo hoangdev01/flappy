@@ -112,8 +112,6 @@ class bg {
             this.score += 1;
             this.current += 1;
             this.createPipe();
-            this.xr.push(this.xr[this.xr.length - 1] + 0.5)
-            this.r.push(Math.floor(Math.random() * PIPE_HEIGHT_MAX + PIPE_HEIGHT_MIN));
         }
     }
 
