@@ -79,6 +79,7 @@ class bg {
                 this.xr[i] -= this.pipeSpeed;
             }
         }
+        this.checkCrash();
     }
 
     draw() {
@@ -89,21 +90,9 @@ class bg {
             if (this.x2 <= -BG_WIDTH) this.x2 = 0;
             this.game.ctx.drawImage(this.image, this.x, 0);
             this.game.ctx.drawImage(this.image, this.x + BG_WIDTH - 1, 0);
-
             for (let i = 0; i < this.xr.length; i++) {
                 this.game.ctx.drawImage(this.pipeDown, this.xr[i] + BG_WIDTH + i * PIPE_SPACE, this.r[i] + PIPE_Y_MAX);
                 this.game.ctx.drawImage(this.pipeUp, this.xr[i] + BG_WIDTH + i * PIPE_SPACE, this.r[i] +PIPE_Y_MIN);
-            }
-            if (((this.game.bird.x >= (this.xr[this.current] + BG_WIDTH + this.current * PIPE_SPACE) - Math.floor(PIPE_WIDTH / 2)) && (this.game.bird.x <= 1 + (this.xr[this.current] + 1.3 * PIPE_WIDTH + BG_WIDTH + this.current * 150) - Math.floor(PIPE_WIDTH / 2))) && (this.game.bird.y <= this.r[this.current] || this.game.bird.y >= this.r[this.current] + 98)) {
-                this.game.bird.gameOver();
-            }
-            else if ((this.game.bird.x >= (this.xr[this.current] + 1.3 * PIPE_WIDTH + BG_WIDTH + this.current * PIPE_SPACE) - Math.floor(PIPE_WIDTH / 2)) && (this.game.bird.x <= 0.5 + (this.xr[this.current] + 1.3 * PIPE_WIDTH + BG_WIDTH + this.current * 150) - Math.floor(PIPE_WIDTH / 2))) {
-                this.score += 1;
-                this.current += 1;
-                this.createPipe();
-
-                this.xr.push(this.xr[this.xr.length - 1] + 0.5)
-                this.r.push(Math.floor(Math.random() * PIPE_HEIGHT_MAX + PIPE_HEIGHT_MIN));
             }
             this.game.ctx.drawImage(this.base, this.x2 - 10, GROUND_Y);
             this.game.ctx.drawImage(this.base, this.x2 + BG_WIDTH - 10, GROUND_Y);
@@ -114,6 +103,20 @@ class bg {
         }
 
     }
+
+    checkCrash(){
+        if (((this.game.bird.x >= (this.xr[this.current] + BG_WIDTH + this.current * PIPE_SPACE) - Math.floor(PIPE_WIDTH / 2)) && (this.game.bird.x <= 1 + (this.xr[this.current] + 1.3 * PIPE_WIDTH + BG_WIDTH + this.current * 150) - Math.floor(PIPE_WIDTH / 2))) && (this.game.bird.y <= this.r[this.current] || this.game.bird.y >= this.r[this.current] + 98)) {
+            this.game.bird.gameOver();
+        }
+        else if ((this.game.bird.x >= (this.xr[this.current] + 1.3 * PIPE_WIDTH + BG_WIDTH + this.current * PIPE_SPACE) - Math.floor(PIPE_WIDTH / 2)) && (this.game.bird.x <= 0.5 + (this.xr[this.current] + 1.3 * PIPE_WIDTH + BG_WIDTH + this.current * 150) - Math.floor(PIPE_WIDTH / 2))) {
+            this.score += 1;
+            this.current += 1;
+            this.createPipe();
+            this.xr.push(this.xr[this.xr.length - 1] + 0.5)
+            this.r.push(Math.floor(Math.random() * PIPE_HEIGHT_MAX + PIPE_HEIGHT_MIN));
+        }
+    }
+
     createPipe() {
         this.xr.push(this.xr[this.xr.length - 1]);
         this.r.push(Math.floor(Math.random() * PIPE_HEIGHT_MAX + PIPE_HEIGHT_MIN));

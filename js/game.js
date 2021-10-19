@@ -4,11 +4,12 @@ class game{
         this.ctx =  this.canvas.getContext('2d');
         this.canvas.width = BG_WIDTH;
         this.canvas.height = BG_HEIGHT;
+        // this.canvas.width = window.innerWidth * 0.8;
+        // this.canvas.height = window.innerHeight * 0.8;
         document.body.appendChild(this.canvas);
         this.bird = new bird(this);
         this.bg = new bg(this);
         this.listenMouse();
-        
         this.loop();
     }
 

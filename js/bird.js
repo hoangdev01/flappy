@@ -68,7 +68,7 @@ class bird{
                 this.vecocity += ACCELERATION;
                 this.y += this.vecocity;
             }
-            else if (this.game.bg.checkStatus == GAME_OVER_STATUS){
+            else if (this.game.bg.checkStatus == IN_GAME_STATUS || this.game.bg.checkStatus == GAME_OVER_STATUS){
                 this.gameOver();
             }
            
