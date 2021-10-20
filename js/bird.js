@@ -2,7 +2,9 @@ class bird{
     constructor(game){
         this.game = game;
         this.images = [];
-
+        this.skillTime=0;
+        this.width=34;
+        this.height=24;
         this.imageUp     = new Image();
         this.imageMid    = new Image();
         this.imageDown   = new Image();
@@ -43,6 +45,9 @@ class bird{
 
         this.x = 100;
         this.y = 200;
+
+        this.doubleScoreSkill=2;
+        this.strongSkill=2;
 
         this.vecocity = 0;
 
@@ -87,7 +92,7 @@ class bird{
 
     draw(){
         if(this.imageDownLoaded && this.imageMidLoaded && this.imageUpLoaded){
-            this.game.ctx.drawImage( this.currentImg , this.x , this.y );
+            this.game.ctx.drawImage( this.currentImg , this.x , this.y ,this.width,this.height);
         }
         // console.log(this.currentImgLoaded ,this.imageDownLoaded ,this.imageMidLoaded,this.imageUpLoaded);
         if(this.gameOverImgLoaded && this.game.bg.checkStatus == GAME_OVER_STATUS){

@@ -9,6 +9,7 @@ class game{
         document.body.appendChild(this.canvas);
         this.bird = new bird(this);
         this.bg = new bg(this);
+        // this.item = new item(this);
         this.listenMouse();
         this.loop();
     }
