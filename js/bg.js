@@ -110,7 +110,8 @@ class bg {
     }
 
     init() {
-        this.xItem = this.xr[this.current] + BG_WIDTH + 1.5 * PIPE_SPACE;
+        this.skillTime=0;
+        this.xItem = BG_WIDTH*3;
         this.yItem = Math.floor(Math.random() * PIPE_HEIGHT_MAX + PIPE_Y_MAX);
         this.checkStatus = START_STATUS;
         this.current = 0;
@@ -120,6 +121,7 @@ class bg {
         this.game.bird.vecocity = 0;
         this.r = new Array(0, 0, 0);
         this.xr = new Array(0, 0, 0);
+        this.pipeCheck = new Array(0, 0, 0);
         this.game.bird.t = 0;
 
         for (let i = 0; i < this.xr.length; i++) {
@@ -133,7 +135,7 @@ class bg {
             this.skillTime--;
         }
         if (this.xItem < -1.5*BG_WIDTH){
-            this.xItem = this.xr[this.current] + BG_WIDTH + this.current * 1.5 * PIPE_SPACE;
+            this.xItem = BG_WIDTH*3;
             this.yItem = Math.floor(Math.random() * PIPE_HEIGHT_MAX + PIPE_Y_MAX);
         }
         if (this.checkStatus == IN_GAME_STATUS) {
@@ -142,8 +144,8 @@ class bg {
             for (let i = 0; i < this.xr.length; i++) {
                 this.xr[i] -= this.pipeSpeed;
             }
+            this.xItem -= ITEM_SPEED;
         }
-        this.xItem -= ITEM_SPEED;
         // reset background 
         if (this.x <= -BG_WIDTH) this.x = 0;
         // reset nền 
@@ -187,11 +189,11 @@ class bg {
         // console.log(this.yItem);
         if (this.game.bird.x>=this.xItem + BG_WIDTH-this.game.bird.width && this.game.bird.x<=this.xItem+ BG_WIDTH+ITEM_SIZE && this.game.bird.y>=this.yItem-this.game.bird.height && this.game.bird.y<=this.yItem+ITEM_SIZE){
             this.skillTime = SKILL_TIME;
+            this.xItem=-1000;
         }
         if (((this.game.bird.x >= (this.xr[this.current] + BG_WIDTH + this.current * PIPE_SPACE) - Math.floor(PIPE_WIDTH / 2)) && (this.game.bird.x <= 1 + (this.xr[this.current] + 1.3 * PIPE_WIDTH + BG_WIDTH + this.current * 150) - Math.floor(PIPE_WIDTH / 2))) && (this.game.bird.y <= this.r[this.current] || this.game.bird.y >= this.r[this.current] + 98)) {
             if(this.skillTime>0){
                 this.pipeCheck[this.current]=1;
-                this.xItem=1000;
             }
             else {
                 this.game.bird.gameOver();
