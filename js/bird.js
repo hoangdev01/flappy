@@ -3,8 +3,10 @@ class bird{
         this.game = game;
         this.images = [];
         this.skillTime=0;
+
         this.width=34;
         this.height=24;
+        
         this.imageUp     = new Image();
         this.imageMid    = new Image();
         this.imageDown   = new Image();

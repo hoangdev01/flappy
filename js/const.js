@@ -38,4 +38,14 @@ const ITEM_SPEED=1.5;
 
 const SKILL_TIME_IMAGE_HEIGHT=10;
 
+const NEGATIVE_INFINITY = -100000;
+const POSITIVE_INFINITY = 100000;
+
+const BIRD_WIDTH = 34;
+const BIRD_HEIGHT = 24;
+
+const SCORE_EACH_TIME=1;
+
+const PIPE_SPEED = 0.5;
+const BG_SPEED = 0.2;
 

@@ -9,6 +9,8 @@ class bg {
         this.start = new Image();
         this.btnResume = new Image();
         this.skillTimeImage = new Image();
+
+        this.imageSkill=[]
         
         // item image
         this.strongImage = new Image();
@@ -49,23 +51,23 @@ class bg {
         this.strongImage.onload = () =>{
             this.strongImageLoaded = true;
             this.currentImg = this.strongImage;
-            // this.images.push(this.strongImage);
+            this.imageSkill.push(this.strongImage);
         }
         this.zoomOutImage.onload = () =>{
             this.zoomOutImageLoaded = true;
-            // this.images.push(this.zoomOutImage);
+            this.imageSkill.push(this.zoomOutImage);
         }
         this.slowDownImage.onload = () =>{
             this.slowDownImageLoaded = true;
-            // this.images.push(this.slowDownImage);
+            this.imageSkill.push(this.slowDownImage);
         }
         this.doubleScoreImage.onload = () =>{
             this.doubleScoreImageLoaded = true;
-            // this.images.push(this.doubleScoreImage);
+            this.imageSkill.push(this.doubleScoreImage);
         }
+        //thanh skill
         this.skillTimeImage.onload = () =>{
             this.skillTimeImageLoaded = true;
-            // this.images.push(this.doubleScoreImage);
         }
 
         this.start.src = 'images/message.png';
@@ -76,11 +78,12 @@ class bg {
         this.pipeUp.src = 'images/pipeUp.png';
         this.btnResume.src = 'images/resume.png';
 
-        //
+        //skill image source
         this.strongImage.src   = 'images/samset.jpg'  ;
-        this.zoomOutImage.src   = 'images/samset.jpg'  ;
-        this.slowDownImage.src   = 'images/samset.jpg'  ;
-        this.doubleScoreImage.src   = 'images/samset.jpg'  ;
+        this.zoomOutImage.src   = 'images/zoomout.png'  ;
+        this.slowDownImage.src   = 'images/time.webp'  ;
+        this.doubleScoreImage.src   = 'images/x2icon.jpg'  ;
+
         this.skillTimeImage.src   = 'images/skillTime.jpeg'  ;
 
         // x là tọa độ ngang background 
@@ -98,11 +101,14 @@ class bg {
         // toa do x y cua item
         this.xItem = 0;
         this.yItem = 0;
+        this.currentSkill=0;
+        this.workingSkill=0;
 
         this.skillTime=0;
         this.current = 0;
         this.backgroundSpeed = 0.2;
         this.pipeSpeed = 0.5;
+        this.scoreEachTime=1;
 
         this.init();
         
@@ -111,6 +117,8 @@ class bg {
 
     init() {
         this.skillTime=0;
+        //skill
+        this.currentSkill=Math.floor(Math.random()*3);
         this.xItem = BG_WIDTH*3;
         this.yItem = Math.floor(Math.random() * PIPE_HEIGHT_MAX + PIPE_Y_MAX);
         this.checkStatus = START_STATUS;
@@ -133,8 +141,13 @@ class bg {
     update() {
         if(this.skillTime>0){
             this.skillTime--;
+            this.activeSkill(this.workingSkill);
+        }
+        else{
+            this.inactivekill();
         }
         if (this.xItem < -1.5*BG_WIDTH){
+            this.currentSkill=Math.floor(Math.random()*3);
             this.xItem = BG_WIDTH*3;
             this.yItem = Math.floor(Math.random() * PIPE_HEIGHT_MAX + PIPE_Y_MAX);
         }
@@ -175,7 +188,18 @@ class bg {
                 this.game.ctx.drawImage(this.btnResume, BG_WIDTH-this.btnResume.width,this.btnResume.height);
             }
             if(this.strongImageLoaded && this.zoomOutImageLoaded && this.slowDownImageLoaded && this.doubleScoreImageLoaded){
-                this.game.ctx.drawImage(this.strongImage, this.xItem + BG_WIDTH,this.yItem , ITEM_SIZE,ITEM_SIZE);
+                if (this.currentSkill==0){
+                    this.game.ctx.drawImage(this.strongImage, this.xItem + BG_WIDTH,this.yItem , ITEM_SIZE,ITEM_SIZE);
+                }
+                else if (this.currentSkill==1){
+                    this.game.ctx.drawImage(this.zoomOutImage, this.xItem + BG_WIDTH,this.yItem , ITEM_SIZE,ITEM_SIZE);
+                }
+                else if (this.currentSkill==2){
+                    this.game.ctx.drawImage(this.slowDownImage, this.xItem + BG_WIDTH,this.yItem , ITEM_SIZE,ITEM_SIZE);
+                }
+                else if (this.currentSkill==3){
+                    this.game.ctx.drawImage(this.doubleScoreImage, this.xItem + BG_WIDTH,this.yItem , ITEM_SIZE,ITEM_SIZE);
+                }
             }
             if(this.skillTimeImageLoaded){
                 this.game.ctx.drawImage(this.skillTimeImage,0,BG_HEIGHT-SKILL_TIME_IMAGE_HEIGHT,this.skillTime/(SKILL_TIME/BG_WIDTH),SKILL_TIME_IMAGE_HEIGHT)
@@ -185,28 +209,24 @@ class bg {
     }
 
     checkCrash(){
-        // console.log(this.game.bird.y);
-        // console.log(this.yItem);
         if (this.game.bird.x>=this.xItem + BG_WIDTH-this.game.bird.width && this.game.bird.x<=this.xItem+ BG_WIDTH+ITEM_SIZE && this.game.bird.y>=this.yItem-this.game.bird.height && this.game.bird.y<=this.yItem+ITEM_SIZE){
             this.skillTime = SKILL_TIME;
-            this.xItem=-1000;
+            this.workingSkill=this.currentSkill;
+            this.xItem=NEGATIVE_INFINITY;
         }
         if (((this.game.bird.x >= (this.xr[this.current] + BG_WIDTH + this.current * PIPE_SPACE) - Math.floor(PIPE_WIDTH / 2)) && (this.game.bird.x <= 1 + (this.xr[this.current] + 1.3 * PIPE_WIDTH + BG_WIDTH + this.current * 150) - Math.floor(PIPE_WIDTH / 2))) && (this.game.bird.y <= this.r[this.current] || this.game.bird.y >= this.r[this.current] + 98)) {
-            if(this.skillTime>0){
+            if(this.skillTime>0 && this.workingSkill==0){
                 this.pipeCheck[this.current]=1;
             }
             else {
                 this.game.bird.gameOver();
             }
         }
-        // else if ((this.game.bird.x >= (this.xr[this.current] + 1.3 * PIPE_WIDTH + BG_WIDTH + this.current * PIPE_SPACE) - Math.floor(PIPE_WIDTH / 2)) && (this.game.bird.x <= 0.5 + (this.xr[this.current] + 1.3 * PIPE_WIDTH + BG_WIDTH + this.current * 150) - Math.floor(PIPE_WIDTH / 2))){
         else if (this.game.bird.x == this.xr[this.current] + PIPE_WIDTH + BG_WIDTH + this.current * 150) {
-            this.score += 1;
+            this.score += this.scoreEachTime;
             this.current += 1;
             this.createPipe();
         }
-        // console.log(this.skillTime);
-        // console.log(this.xr[this.current] + PIPE_WIDTH + BG_WIDTH + this.current * 150);
 
     }
 
@@ -215,6 +235,35 @@ class bg {
         this.r.push(Math.floor(Math.random() * PIPE_HEIGHT_MAX + PIPE_HEIGHT_MIN));
         this.pipeCheck.push(0);
     }
+
+    activeSkill(index){
+        //zoom out
+        if(index==1){
+            if(this.game.bird.height>BIRD_HEIGHT/2 && this.game.bird.width > BIRD_WIDTH/2){
+                this.game.bird.width-=1;
+                this.game.bird.height-=1;
+            }
+        }
+        //slowdow
+        else if(index==2){
+            this.pipeSpeed=PIPE_SPEED/2;
+            this.backgroundSpeed=BG_SPEED/2;
+        }
+        //doublescore
+        else if (index==3){
+            this.scoreEachTime=SCORE_EACH_TIME*2;
+        }
+    }
+
+    inactivekill(){
+        this.game.bird.width=BIRD_WIDTH;
+        this.game.bird.height=BIRD_HEIGHT;
+        this.pipeSpeed=PIPE_SPEED;
+        this.backgroundSpeed=BG_SPEED;
+        this.scoreEachTime=SCORE_EACH_TIME;
+    }    
+
+
 
 
 }

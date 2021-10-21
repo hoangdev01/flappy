@@ -7,6 +7,7 @@ class game{
         // this.canvas.width = window.innerWidth * 0.8;
         // this.canvas.height = window.innerHeight * 0.8;
         document.body.appendChild(this.canvas);
+        this.timeLoop = TIME_LOOP;
         this.bird = new bird(this);
         this.bg = new bg(this);
         // this.item = new item(this);
@@ -25,7 +26,7 @@ class game{
     loop(){
         this.update();
         this.draw();
-        setTimeout( () => this.loop() , TIME_LOOP);
+        setTimeout( () => this.loop() , this.timeLoop);
     }
 
     draw(){
