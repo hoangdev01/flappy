@@ -12,7 +12,6 @@ const PIPE_SPACE = 150;
 
 const ACCELERATION = 0.07;
 
-
 const BIRD_INIT_POSITION_X = 135;
 const BIRD_INIT_POSITION_Y = 200;
 
