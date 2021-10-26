@@ -127,9 +127,9 @@ class bg {
         this.game.bird.y = BIRD_INIT_POSITION_Y;
         this.score = 0;
         this.game.bird.vecocity = 0;
-        this.r = new Array(0, 0, 0);
-        this.xr = new Array(0, 0, 0);
-        this.pipeCheck = new Array(0, 0, 0);
+        this.r = new Array(0, 0, 0,0,0,0);
+        this.xr = new Array(0, 0, 0,0,0,0);
+        this.pipeCheck = new Array(0, 0, 0,0,0,0);
         this.game.bird.t = 0;
 
         for (let i = 0; i < this.xr.length; i++) {
@@ -170,6 +170,8 @@ class bg {
         if (this.baseLoaded && this.imageLoaded) {
             this.game.ctx.drawImage(this.image, this.x, 0);
             this.game.ctx.drawImage(this.image, this.x + BG_WIDTH - 1, 0);
+            this.game.ctx.drawImage(this.image, this.x + 2*BG_WIDTH - 2, 0);
+            this.game.ctx.drawImage(this.image, this.x + 3*BG_WIDTH - 3, 0);
             if (this.pipeUpLoaded&&this.pipeDownLoaded)
                 for (let i = 0; i < this.xr.length; i++) {
                     if (this.pipeCheck[i]==0){
@@ -179,6 +181,8 @@ class bg {
                 }
             this.game.ctx.drawImage(this.base, this.x2 - 10, GROUND_Y);
             this.game.ctx.drawImage(this.base, this.x2 + BG_WIDTH - 10, GROUND_Y);
+            this.game.ctx.drawImage(this.base, this.x2 + 2*BG_WIDTH - 10, GROUND_Y);
+            this.game.ctx.drawImage(this.base, this.x2 + 3*BG_WIDTH - 10, GROUND_Y);
 
             if (this.checkStatus == START_STATUS && this.startLoaded) {
                 this.game.ctx.drawImage(this.start, 60, 31);
@@ -214,7 +218,7 @@ class bg {
             this.workingSkill=this.currentSkill;
             this.xItem=NEGATIVE_INFINITY;
         }
-        if (((this.game.bird.x >= (this.xr[this.current] + BG_WIDTH + this.current * PIPE_SPACE) - Math.floor(PIPE_WIDTH / 2)) && (this.game.bird.x <= 1 + (this.xr[this.current] + 1.3 * PIPE_WIDTH + BG_WIDTH + this.current * 150) - Math.floor(PIPE_WIDTH / 2))) && (this.game.bird.y <= this.r[this.current] || this.game.bird.y >= this.r[this.current] + 98)) {
+        if (((this.game.bird.x >= (this.xr[this.current] + BG_WIDTH + this.current * PIPE_SPACE) - this.game.bird.width && (this.game.bird.x <= (this.xr[this.current] + PIPE_WIDTH + BG_WIDTH + this.current * PIPE_SPACE))) && (this.game.bird.y + this.game.bird.height >= this.r[this.current] + PIPE_Y_MAX || this.game.bird.y <= this.r[this.current] + PIPE_Y_MIN + PIPE_HEIGHT))) {
             if(this.skillTime>0 && this.workingSkill==0){
                 this.pipeCheck[this.current]=1;
             }
@@ -222,7 +226,7 @@ class bg {
                 this.game.bird.gameOver();
             }
         }
-        else if (this.game.bird.x == this.xr[this.current] + PIPE_WIDTH + BG_WIDTH + this.current * 150) {
+        else if (this.game.bird.x == this.xr[this.current] + PIPE_WIDTH + BG_WIDTH + this.current * PIPE_SPACE) {
             this.score += this.scoreEachTime;
             this.current += 1;
             this.createPipe();

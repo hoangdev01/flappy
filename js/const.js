@@ -1,5 +1,7 @@
-const BG_HEIGHT = 512;
 const BG_WIDTH = 289;
+const BG_HEIGHT = 512;
+const CANVAS_WIDTH=800;
+const CANVAS_HEIGHT=BG_HEIGHT
 
 const PIPE_HEIGHT = 320;
 const PIPE_WIDTH = 52;

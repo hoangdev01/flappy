@@ -1,9 +1,9 @@
 class game{
-    constructor(){
-        this.canvas = document.createElement('canvas');
+    constructor(ID){
+        this.canvas = document.getElementById(ID);
         this.ctx =  this.canvas.getContext('2d');
-        this.canvas.width = BG_WIDTH;
-        this.canvas.height = BG_HEIGHT;
+        this.canvas.width = CANVAS_WIDTH;
+        this.canvas.height = CANVAS_HEIGHT;
         // this.canvas.width = window.innerWidth * 0.8;
         // this.canvas.height = window.innerHeight * 0.8;
         document.body.appendChild(this.canvas);
@@ -47,4 +47,4 @@ class game{
 
 }
 
-var g = new game();
+var g = new game("canvas");
