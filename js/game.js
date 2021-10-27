@@ -1,7 +1,8 @@
 class game{
-    constructor(ID){
+    constructor(ID, birdPath){
         this.canvas = document.getElementById(ID);
         this.ctx =  this.canvas.getContext('2d');
+        this.birdPath = birdPath;
         this.canvas.width = CANVAS_WIDTH;
         this.canvas.height = CANVAS_HEIGHT;
         // this.canvas.width = window.innerWidth * 0.8;
@@ -44,11 +45,11 @@ class game{
         this.bird.update();
         this.bg.update();
     }
-     callPHP(params) {
+    callPHP(params) {
         var httpc = new XMLHttpRequest(); // simplified for clarity
         var url = "get_data.php";
         httpc.open("POST", url, true); // sending as POST
-    
+
         httpc.onreadystatechange = function() { //Call a function when the state changes.
             if(httpc.readyState == 4 && httpc.status == 200) { // complete and no errors
                 alert(httpc.responseText); // some processing here, or whatever you want to do with the response
@@ -58,4 +59,41 @@ class game{
     }
 }
 
-var g = new game("canvas");
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+}
+var btnStartGame = document.getElementById("start-game");
+
+btnStartGame.addEventListener("click", function() {
+    var birdPath="";
+    var container = document.getElementById("container");
+    container.style.display="none"; 
+    if(slideIndex==1) birdPath="defaultBird";
+    else if(slideIndex==2) birdPath="yellowBird";
+    else birdPath="rectangularBird";
+
+    var g = new game("canvas",birdPath);
+}); 

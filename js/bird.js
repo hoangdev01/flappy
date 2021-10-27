@@ -8,14 +8,14 @@ class bird{
         this.height=24;
         
         this.imageUp     = new Image();
-        this.imageMid    = new Image();
+        // this.imageMid    = new Image();
         this.imageDown   = new Image();
         this.gameOverImg = new Image();
         
         this.currentImg = null;
 
         this.imageUpLoaded     = false;
-        this.imageMidLoaded    = false;
+        // this.imageMidLoaded    = false;
         this.imageDownLoaded   = false;
         this.gameOverImgLoaded = false;
         
@@ -25,10 +25,10 @@ class bird{
             this.images.push(this.imageUp);
         }
 
-        this.imageMid.onload = () =>{
-            this.imageMidLoaded = true;
-            this.images.push(this.imageMid);
-        }
+        // this.imageMid.onload = () =>{
+        //     this.imageMidLoaded = true;
+        //     this.images.push(this.imageMid);
+        // }
 
         this.imageDown.onload = () =>{
             this.imageDownLoaded = true;
@@ -39,10 +39,9 @@ class bird{
             this.gameOverImgLoaded = true;
             // console.log("loaded");
         }
-        
-        this.imageUp.src   = 'images/skinBird2.1.png'  ;
-        this.imageMid.src  = 'images/skinBird2.2.png' ;
-        this.imageDown.src = 'images/skinBird2.2.png';
+        this.path= "images/"+this.game.birdPath+'/up.png';
+        this.imageUp.src   = "images/"+this.game.birdPath+'/up.png'  ;
+        this.imageDown.src = "images/"+this.game.birdPath+'/down.png' ;
         this.gameOverImg.src = 'images/gameover.png';
 
         this.x = 100;
@@ -61,25 +60,17 @@ class bird{
 
     
     update(){
-
-        if(!this.imageDownLoaded || !this.imageMidLoaded || !this.imageUpLoaded){
-            return;
+        this.t++;
+        if(this.t == 61) this.t = 0;
+        if(this.t <= 30 ) this.currentImg = this.imageDown;
+        else this.currentImg = this.imageUp;
+        if(this.y < 380 && this.game.bg.checkStatus == IN_GAME_STATUS){
+            this.vecocity += ACCELERATION;
+            this.y += this.vecocity;
         }
-        else{
-            this.t++;
-            if(this.t == 61) this.t = 0;
-            if(this.t <= 30 ) this.currentImg = this.imageDown;
-            else this.currentImg = this.imageUp;
-            if(this.y < 380 && this.game.bg.checkStatus == IN_GAME_STATUS){
-                this.vecocity += ACCELERATION;
-                this.y += this.vecocity;
-            }
-            else if (this.game.bg.checkStatus == IN_GAME_STATUS || this.game.bg.checkStatus == GAME_OVER_STATUS){
-                this.gameOver();
-            }
-           
+        else if (this.game.bg.checkStatus == IN_GAME_STATUS || this.game.bg.checkStatus == GAME_OVER_STATUS){
+            this.gameOver();
         }
-        
     }
 
     gameOver(){
@@ -92,7 +83,7 @@ class bird{
     }
 
     draw(){
-        if(this.imageDownLoaded && this.imageMidLoaded && this.imageUpLoaded){
+        if(this.imageDownLoaded && this.imageUpLoaded){
             this.game.ctx.drawImage( this.currentImg , this.x , this.y ,this.width,this.height);
         }
         // console.log(this.currentImgLoaded ,this.imageDownLoaded ,this.imageMidLoaded,this.imageUpLoaded);
