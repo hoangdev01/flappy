@@ -84,7 +84,7 @@ class bg {
         this.slowDownImage.src   = 'images/time.webp'  ;
         this.doubleScoreImage.src   = 'images/x2icon.png'  ;
 
-        this.skillTimeImage.src   = 'images/skillTime.jpeg'  ;
+        this.skillTimeImage.src   = 'images/skillTime.png'  ;
 
         // x là tọa độ ngang background 
         this.x = 0;
@@ -206,7 +206,7 @@ class bg {
                 }
             }
             if(this.skillTimeImageLoaded){
-                this.game.ctx.drawImage(this.skillTimeImage,0,BG_HEIGHT-SKILL_TIME_IMAGE_HEIGHT,this.skillTime/(SKILL_TIME/BG_WIDTH),SKILL_TIME_IMAGE_HEIGHT)
+                this.game.ctx.drawImage(this.skillTimeImage,0,BG_HEIGHT-SKILL_TIME_IMAGE_HEIGHT,this.skillTime/(SKILL_TIME/CANVAS_WIDTH),SKILL_TIME_IMAGE_HEIGHT)
             }
         }
 
