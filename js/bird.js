@@ -40,9 +40,9 @@ class bird{
             // console.log("loaded");
         }
         
-        this.imageUp.src   = 'images/up.png'  ;
-        this.imageMid.src  = 'images/mid.png' ;
-        this.imageDown.src = 'images/down.png';
+        this.imageUp.src   = 'images/skinBird2.1.png'  ;
+        this.imageMid.src  = 'images/skinBird2.2.png' ;
+        this.imageDown.src = 'images/skinBird2.2.png';
         this.gameOverImg.src = 'images/gameover.png';
 
         this.x = 100;
@@ -68,8 +68,7 @@ class bird{
         else{
             this.t++;
             if(this.t == 61) this.t = 0;
-            if(this.t <= 20 ) this.currentImg = this.imageDown;
-            else if (this.t <= 40) this.currentImg = this. imageMid;
+            if(this.t <= 30 ) this.currentImg = this.imageDown;
             else this.currentImg = this.imageUp;
             if(this.y < 380 && this.game.bg.checkStatus == IN_GAME_STATUS){
                 this.vecocity += ACCELERATION;

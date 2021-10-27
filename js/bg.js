@@ -79,10 +79,10 @@ class bg {
         this.btnResume.src = 'images/resume.png';
 
         //skill image source
-        this.strongImage.src   = 'images/samset.jpg'  ;
+        this.strongImage.src   = 'images/strong.png'  ;
         this.zoomOutImage.src   = 'images/zoomout.png'  ;
         this.slowDownImage.src   = 'images/time.webp'  ;
-        this.doubleScoreImage.src   = 'images/x2icon.jpg'  ;
+        this.doubleScoreImage.src   = 'images/x2icon.png'  ;
 
         this.skillTimeImage.src   = 'images/skillTime.jpeg'  ;
 
@@ -118,7 +118,7 @@ class bg {
     init() {
         this.skillTime=0;
         //skill
-        this.currentSkill=Math.floor(Math.random()*3);
+        this.currentSkill=Math.floor(Math.random()*4);
         this.xItem = BG_WIDTH*3;
         this.yItem = Math.floor(Math.random() * PIPE_HEIGHT_MAX + PIPE_Y_MAX);
         this.checkStatus = START_STATUS;
@@ -147,7 +147,7 @@ class bg {
             this.inactivekill();
         }
         if (this.xItem < -1.5*BG_WIDTH){
-            this.currentSkill=Math.floor(Math.random()*3);
+            this.currentSkill=Math.floor(Math.random()*4-0.01);
             this.xItem = BG_WIDTH*3;
             this.yItem = Math.floor(Math.random() * PIPE_HEIGHT_MAX + PIPE_Y_MAX);
         }
@@ -218,7 +218,7 @@ class bg {
             this.workingSkill=this.currentSkill;
             this.xItem=NEGATIVE_INFINITY;
         }
-        if (((this.game.bird.x >= (this.xr[this.current] + BG_WIDTH + this.current * PIPE_SPACE) - this.game.bird.width && (this.game.bird.x <= (this.xr[this.current] + PIPE_WIDTH + BG_WIDTH + this.current * PIPE_SPACE))) && (this.game.bird.y + this.game.bird.height >= this.r[this.current] + PIPE_Y_MAX || this.game.bird.y <= this.r[this.current] + PIPE_Y_MIN + PIPE_HEIGHT))) {
+        if (((this.game.bird.x >= (this.xr[this.current] + BG_WIDTH + this.current * PIPE_SPACE) - this.game.bird.width + BIRD_CONNER && (this.game.bird.x <= (this.xr[this.current] + PIPE_WIDTH + BG_WIDTH + this.current * PIPE_SPACE) - BIRD_CONNER)) && (this.game.bird.y + this.game.bird.height >= this.r[this.current] + PIPE_Y_MAX + BIRD_CONNER|| this.game.bird.y <= this.r[this.current] + PIPE_Y_MIN + PIPE_HEIGHT - BIRD_CONNER))) {
             if(this.skillTime>0 && this.workingSkill==0){
                 this.pipeCheck[this.current]=1;
             }

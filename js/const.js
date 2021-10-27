@@ -16,6 +16,7 @@ const ACCELERATION = 0.07;
 
 const BIRD_INIT_POSITION_X = 135;
 const BIRD_INIT_POSITION_Y = 200;
+const BIRD_CONNER = 5;
 
 const TIME_LOOP = 1;
 
