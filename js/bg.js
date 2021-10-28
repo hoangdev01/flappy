@@ -279,7 +279,4 @@ class bg {
         this.scoreEachTime=SCORE_EACH_TIME;
     }    
 
-
-
-
 }
