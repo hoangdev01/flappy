@@ -8,14 +8,12 @@ class bird{
         this.height=24;
         
         this.imageUp     = new Image();
-        // this.imageMid    = new Image();
         this.imageDown   = new Image();
         this.gameOverImg = new Image();
         
         this.currentImg = null;
 
         this.imageUpLoaded     = false;
-        // this.imageMidLoaded    = false;
         this.imageDownLoaded   = false;
         this.gameOverImgLoaded = false;
         
@@ -24,12 +22,6 @@ class bird{
             this.currentImg = this.imageUp;
             this.images.push(this.imageUp);
         }
-
-        // this.imageMid.onload = () =>{
-        //     this.imageMidLoaded = true;
-        //     this.images.push(this.imageMid);
-        // }
-
         this.imageDown.onload = () =>{
             this.imageDownLoaded = true;
             this.images.push(this.imageDown);
@@ -37,7 +29,6 @@ class bird{
         
         this.gameOverImg.onload = () => {
             this.gameOverImgLoaded = true;
-            // console.log("loaded");
         }
         this.path= "images/"+this.game.birdPath+'/up.png';
         this.imageUp.src   = "images/"+this.game.birdPath+'/up.png'  ;
@@ -53,8 +44,6 @@ class bird{
         this.vecocity = 0;
 
         this.t = 0;
-
-        // console.log(this.gameOverImgLoaded);
     }
 
 
@@ -64,7 +53,7 @@ class bird{
         if(this.t == 61) this.t = 0;
         if(this.t <= 30 ) this.currentImg = this.imageDown;
         else this.currentImg = this.imageUp;
-        if(this.y < 380 && this.game.bg.checkStatus == IN_GAME_STATUS){
+        if(this.y + this.height - BIRD_CONNER < BG_HEIGHT - BASE_HEIGHT && this.game.bg.checkStatus == IN_GAME_STATUS){
             this.vecocity += ACCELERATION;
             this.y += this.vecocity;
         }
@@ -74,6 +63,10 @@ class bird{
     }
 
     gameOver(){
+        if(this.game.bg.checkStatus==IN_GAME_STATUS){
+            this.game.playAudio(this.game.hitAudio);
+            this.game.playAudio(this.game.dieAudio);
+        }
         this.game.bg.checkStatus = GAME_OVER_STATUS;
         this.t = 40;
     }
@@ -86,22 +79,18 @@ class bird{
         if(this.imageDownLoaded && this.imageUpLoaded){
             this.game.ctx.drawImage( this.currentImg , this.x , this.y ,this.width,this.height);
         }
-        // console.log(this.currentImgLoaded ,this.imageDownLoaded ,this.imageMidLoaded,this.imageUpLoaded);
         if(this.gameOverImgLoaded && this.game.bg.checkStatus == GAME_OVER_STATUS){
-            this.game.ctx.drawImage(this.gameOverImg,50,BG_HEIGHT/7);
-            this.game.ctx.fillStyle='#FCA146';    // color of fill
-            this.game.ctx.textAlign = "center"
-            this.game.ctx.fillRect((BG_WIDTH-SCORE_WIDTH)/2, (BG_HEIGHT-SCORE_HEIGHT)/2, SCORE_WIDTH, SCORE_HEIGHT); // create rectangle  
+            this.game.ctx.textAlign = "center";
+            this.game.ctx.drawImage(this.gameOverImg,CANVAS_WIDTH/2.5,BG_HEIGHT/7);
+            this.game.ctx.fillStyle='#FCA146';   
+            this.game.ctx.fillRect((CANVAS_WIDTH-SCORE_WIDTH)/2, (BG_HEIGHT-SCORE_HEIGHT)/2, SCORE_WIDTH, SCORE_HEIGHT); 
             this.game.ctx.fillStyle = "white";
             this.game.ctx.font = "bold 20px Arial";
-            this.game.ctx.textAlign = "center"
-            this.game.ctx.fillText('Score: ' + this.game.bg.score, BG_WIDTH/1.5, (BG_HEIGHT/2.25));
+            this.game.ctx.fillText('Score: ' + this.game.bg.score, CANVAS_WIDTH/1.5, (BG_HEIGHT/2.25));
             
-            this.game.ctx.textAlign = "center"
-            this.game.ctx.fillText('Best: ' + this.game.bg.score, BG_WIDTH/1.5, (BG_HEIGHT/1.75));
+            this.game.ctx.fillText('Best: ' + this.game.bg.score, CANVAS_WIDTH/1.5, (BG_HEIGHT/1.75));
 
-            this.game.ctx.textAlign = "center"
-            this.game.ctx.fillText('Rank: ' + this.game.bg.score, BG_WIDTH/3.5, BG_HEIGHT/2);
+            this.game.ctx.fillText('Rank: ' + this.game.bg.score, CANVAS_WIDTH/3.5, BG_HEIGHT/2);
         }
     }
 

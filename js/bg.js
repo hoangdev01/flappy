@@ -209,30 +209,42 @@ class bg {
                 this.game.ctx.drawImage(this.skillTimeImage,0,BG_HEIGHT-SKILL_TIME_IMAGE_HEIGHT,this.skillTime/(SKILL_TIME/CANVAS_WIDTH),SKILL_TIME_IMAGE_HEIGHT)
             }
         }
+        if(this.checkStatus == 0){
+            this.game.ctx.fillStyle = "white";
+            this.game.ctx.font = "bold 40px Arial";
+            this.game.ctx.textAlign = "center"
+            this.game.ctx.fillText(this.score, CANVAS_WIDTH/2, (BG_HEIGHT / 7));
+        }
 
     }
 
     checkCrash(){
         if (this.game.bird.x>=this.xItem + BG_WIDTH-this.game.bird.width && this.game.bird.x<=this.xItem+ BG_WIDTH+ITEM_SIZE && this.game.bird.y>=this.yItem-this.game.bird.height && this.game.bird.y<=this.yItem+ITEM_SIZE){
+            if(this.currentSkill==0) this.game.playAudio(this.game.strongAudio);
+            else if (this.currentSkill==1) this.game.playAudio(this.game.zoomOutAudio);
+            else if (this.currentSkill==2) this.game.playAudio(this.game.slowDownTimeAudio);
+            else if (this.currentSkill==3) this.game.playAudio(this.game.doubleScoreAudio);
             this.skillTime = SKILL_TIME;
             this.workingSkill=this.currentSkill;
             this.xItem=NEGATIVE_INFINITY;
         }
         if (((this.game.bird.x >= (this.xr[this.current] + BG_WIDTH + this.current * PIPE_SPACE) - this.game.bird.width + BIRD_CONNER && (this.game.bird.x <= (this.xr[this.current] + PIPE_WIDTH + BG_WIDTH + this.current * PIPE_SPACE) - BIRD_CONNER)) && (this.game.bird.y + this.game.bird.height >= this.r[this.current] + PIPE_Y_MAX + BIRD_CONNER|| this.game.bird.y <= this.r[this.current] + PIPE_Y_MIN + PIPE_HEIGHT - BIRD_CONNER))) {
-            if(this.skillTime>0 && this.workingSkill==0){
+            if(this.skillTime>0 && this.workingSkill==0 && this.pipeCheck[this.current]==0){
                 this.pipeCheck[this.current]=1;
+                this.game.playAudio(this.game.removePipeAudio);
             }
             else {
-                this.game.bird.gameOver();
+                // this.game.bird.gameOver();
             }
         }
         else if (this.game.bird.x == this.xr[this.current] + PIPE_WIDTH + BG_WIDTH + this.current * PIPE_SPACE) {
             this.score += this.scoreEachTime;
             this.current += 1;
             this.createPipe();
+            this.game.playAudio(this.game.pointAudio);
         }
 
-    }
+    } 
 
     createPipe() {
         this.xr.push(this.xr[this.xr.length - 1]);

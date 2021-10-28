@@ -11,6 +11,16 @@ class game{
         this.timeLoop = TIME_LOOP;
         this.bird = new bird(this);
         this.bg = new bg(this);
+
+        this.wingAudio="sound/wing.ogg";
+        this.hitAudio="sound/hit.ogg";
+        this.dieAudio="sound/die.ogg";
+        this.pointAudio="sound/point.ogg";
+        this.strongAudio="sound/strong.wav";
+        this.doubleScoreAudio="sound/doubleScore.wav";
+        this.slowDownTimeAudio="sound/slowDownTime.wav";
+        this.zoomOutAudio="sound/zoomout.wav";
+        this.removePipeAudio="sound/removePipe.mp3";
         // this.item = new item(this);
         this.listenMouse();
         this.loop();
@@ -18,7 +28,10 @@ class game{
 
     listenMouse(){
         this.canvas.addEventListener('click',() => {
-            if (this.bg.checkStatus == IN_GAME_STATUS) this.bird.vecocity = -3;
+            if (this.bg.checkStatus == IN_GAME_STATUS) {
+                this.bird.vecocity = -3;
+                this.playAudio(this.wingAudio);
+            }
             else if (this.bg.checkStatus == GAME_OVER_STATUS) this.bg.init();
             else if (this.bg.checkStatus == START_STATUS) this.bg.checkStatus = IN_GAME_STATUS;
         });
@@ -33,12 +46,6 @@ class game{
     draw(){
         this.bg.draw();
         this.bird.draw();
-        if(this.bg.checkStatus == 0){
-            this.ctx.fillStyle = "white";
-            this.ctx.font = "bold 30px Arial";
-            this.ctx.textAlign = "center"
-            this.ctx.fillText(this.bg.score, BG_WIDTH/2, (BG_HEIGHT / 7));
-        }
     }
 
     update(){
@@ -56,6 +63,13 @@ class game{
             }
         };
         httpc.send(params);
+    }
+    
+    playAudio(path) {
+        this.audioStatus=false;
+        var audio = new Audio(path);
+        audio.play();
+        
     }
 }
 
