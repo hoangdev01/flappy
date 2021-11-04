@@ -11,6 +11,7 @@ class game{
         this.timeLoop = TIME_LOOP;
         this.bird = new bird(this);
         this.bg = new bg(this);
+        this.continueTime=0;
 
         this.wingAudio="sound/wing.ogg";
         this.hitAudio="sound/hit.ogg";
@@ -34,6 +35,14 @@ class game{
             }
             else if (this.bg.checkStatus == GAME_OVER_STATUS) this.bg.init();
             else if (this.bg.checkStatus == START_STATUS) this.bg.checkStatus = IN_GAME_STATUS;
+            else if (this.bg.checkStatus == PAUSE_STATUS) this.bg.checkStatus = CONTINUE_STATUS;
+        });
+        this.canvas.addEventListener('contextmenu', ev => {
+            ev.preventDefault();
+            if(this.bg.checkStatus == IN_GAME_STATUS){
+                this.bg.checkStatus = PAUSE_STATUS;
+                this.continueTime = 300;
+            }
         });
     }
 

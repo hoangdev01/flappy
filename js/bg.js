@@ -148,7 +148,7 @@ class bg {
         }
         if (this.xItem < -1.5*BG_WIDTH){
             this.currentSkill=Math.floor(Math.random()*4-0.01);
-            this.xItem = BG_WIDTH*3;
+            this.xItem = BG_WIDTH*3.5;
             this.yItem = Math.floor(Math.random() * PIPE_HEIGHT_MAX + PIPE_Y_MAX);
         }
         if (this.checkStatus == IN_GAME_STATUS) {
@@ -188,9 +188,6 @@ class bg {
                 this.game.ctx.drawImage(this.start, 60, 31);
             }
             this.game.ctx.drawImage(this.base, this.x2 - 10, GROUND_Y);
-            if(this.btnResumeLoaded && this.checkStatus == PAUSE_STATUS){
-                this.game.ctx.drawImage(this.btnResume, BG_WIDTH-this.btnResume.width,this.btnResume.height);
-            }
             if(this.strongImageLoaded && this.zoomOutImageLoaded && this.slowDownImageLoaded && this.doubleScoreImageLoaded){
                 if (this.currentSkill==0){
                     this.game.ctx.drawImage(this.strongImage, this.xItem + BG_WIDTH,this.yItem , ITEM_SIZE,ITEM_SIZE);
@@ -209,11 +206,27 @@ class bg {
                 this.game.ctx.drawImage(this.skillTimeImage,0,BG_HEIGHT-SKILL_TIME_IMAGE_HEIGHT,this.skillTime/(SKILL_TIME/CANVAS_WIDTH),SKILL_TIME_IMAGE_HEIGHT)
             }
         }
-        if(this.checkStatus == 0){
+        if(this.checkStatus == IN_GAME_STATUS){
             this.game.ctx.fillStyle = "white";
             this.game.ctx.font = "bold 40px Arial";
             this.game.ctx.textAlign = "center"
             this.game.ctx.fillText(this.score, CANVAS_WIDTH/2, (BG_HEIGHT / 7));
+        }
+        if(this.checkStatus==PAUSE_STATUS){
+            this.game.ctx.fillStyle = "white";
+            this.game.ctx.font = "bold 50px Arial";
+            this.game.ctx.textAlign = "center"
+            this.game.ctx.fillText("PAUSE", CANVAS_WIDTH/2, (BG_HEIGHT / 2));
+        }
+        if(this.checkStatus==CONTINUE_STATUS){
+            this.game.ctx.fillStyle = "white";
+            this.game.ctx.font = "bold 50px Arial";
+            this.game.ctx.textAlign = "center"
+            this.game.ctx.fillText(Math.floor(this.game.continueTime/100), CANVAS_WIDTH/2, (BG_HEIGHT / 2));
+            this.game.continueTime-=1;
+            if(this.game.continueTime <= 0){
+                this.checkStatus = IN_GAME_STATUS;
+            }
         }
 
     }
@@ -234,7 +247,7 @@ class bg {
                 this.game.playAudio(this.game.removePipeAudio);
             }
             else {
-                // this.game.bird.gameOver();
+                this.game.bird.gameOver();
             }
         }
         else if (this.game.bird.x == this.xr[this.current] + PIPE_WIDTH + BG_WIDTH + this.current * PIPE_SPACE) {

@@ -36,6 +36,7 @@ const START_STATUS = -1;
 const IN_GAME_STATUS = 0;
 const GAME_OVER_STATUS = 1;
 const PAUSE_STATUS = 2;
+const CONTINUE_STATUS=3;
 
 const BTN_PAUSE_SIZE = 30;
 

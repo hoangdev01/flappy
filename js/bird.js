@@ -43,16 +43,13 @@ class bird{
 
         this.vecocity = 0;
 
-        this.t = 0;
     }
 
 
     
     update(){
-        this.t++;
-        if(this.t == 61) this.t = 0;
-        if(this.t <= 30 ) this.currentImg = this.imageDown;
-        else this.currentImg = this.imageUp;
+        if(this.vecocity < -2 || this.vecocity > 0) this.currentImg = this.imageUp;
+        else this.currentImg = this.imageDown;
         if(this.y + this.height - BIRD_CONNER < BG_HEIGHT - BASE_HEIGHT && this.game.bg.checkStatus == IN_GAME_STATUS){
             this.vecocity += ACCELERATION;
             this.y += this.vecocity;
@@ -68,7 +65,6 @@ class bird{
             this.game.playAudio(this.game.dieAudio);
         }
         this.game.bg.checkStatus = GAME_OVER_STATUS;
-        this.t = 40;
     }
     
     changeImg(){
