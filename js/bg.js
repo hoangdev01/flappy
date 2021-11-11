@@ -123,14 +123,15 @@ class bg {
         this.yItem = Math.floor(Math.random() * PIPE_HEIGHT_MAX + PIPE_Y_MAX);
         this.checkStatus = START_STATUS;
         this.current = 0;
-        this.game.bird.x = BIRD_INIT_POSITION_X;
-        this.game.bird.y = BIRD_INIT_POSITION_Y;
         this.score = 0;
-        this.game.bird.vecocity = 0;
         this.r = new Array(0, 0, 0,0,0,0);
         this.xr = new Array(0, 0, 0,0,0,0);
         this.pipeCheck = new Array(0, 0, 0,0,0,0);
+        this.game.bird.x = BIRD_INIT_POSITION_X;
+        this.game.bird.y = BIRD_INIT_POSITION_Y;
+        this.game.bird.vecocity = 0;
         this.game.bird.t = 0;
+        this.game.bird.startTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
         for (let i = 0; i < this.xr.length; i++) {
             this.xr[i] = 0;

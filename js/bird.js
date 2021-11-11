@@ -43,6 +43,10 @@ class bird{
 
         this.vecocity = 0;
 
+        this.result = "";
+        this.startTime = null;
+        this.endTime = null;
+
     }
 
 
@@ -63,6 +67,9 @@ class bird{
         if(this.game.bg.checkStatus==IN_GAME_STATUS){
             this.game.playAudio(this.game.hitAudio);
             this.game.playAudio(this.game.dieAudio);
+            this.endTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
+            this.result = "2,'" + this.startTime + "','" + this.endTime + "'," + this.game.bg.score;
+            this.game.callPHP(this.result);
         }
         this.game.bg.checkStatus = GAME_OVER_STATUS;
     }
