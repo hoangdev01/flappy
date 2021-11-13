@@ -68,8 +68,7 @@ class bird{
             this.game.playAudio(this.game.hitAudio);
             this.game.playAudio(this.game.dieAudio);
             this.endTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
-            this.result = "2,'" + this.startTime + "','" + this.endTime + "'," + this.game.bg.score;
-            this.game.callPHP(this.result);
+            this.game.callPHP(this.startTime,this.endTime,this.game.bg.score);
         }
         this.game.bg.checkStatus = GAME_OVER_STATUS;
     }

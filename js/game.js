@@ -61,11 +61,14 @@ class game{
         this.bird.update();
         this.bg.update();
     }
-    callPHP(params) {
-        var url = "get_score.php";
+    callPHP(startTime,endTime,score) {
+        var url = "save_score.php";
         var form = new FormData();
-        form.set('x', params);
-        console.log(params);
+        form.set('user-id',2);
+        form.set('start-time', startTime);
+        form.set('end-time', endTime);
+        form.set('score', score);
+        console.log(form);
         fetch(url,{method:'POST',body:form}).then(function(response){
             return response.text();
         })
