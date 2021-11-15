@@ -1,8 +1,9 @@
 class game{
-    constructor(ID, birdPath){
+    constructor(ID,username, birdPath){
         this.canvas = document.getElementById(ID);
         this.ctx =  this.canvas.getContext('2d');
         this.birdPath = birdPath;
+        this.username = username;
         this.canvas.width = CANVAS_WIDTH;
         this.canvas.height = CANVAS_HEIGHT;
         // this.canvas.width = window.innerWidth * 0.8;
@@ -12,6 +13,8 @@ class game{
         this.bird = new bird(this);
         this.bg = new bg(this);
         this.continueTime=0;
+
+        
 
         this.wingAudio="sound/wing.ogg";
         this.hitAudio="sound/hit.ogg";
@@ -64,7 +67,7 @@ class game{
     callPHP(startTime,endTime,score) {
         var url = "save_score.php";
         var form = new FormData();
-        form.set('user-id',2);
+        form.set('username',this.username);
         form.set('start-time', startTime);
         form.set('end-time', endTime);
         form.set('score', score);
@@ -84,6 +87,8 @@ class game{
         
     }
 }
+
+console.log(username);
 
 var slideIndex = 1;
 showSlides(slideIndex);
@@ -111,7 +116,18 @@ function showSlides(n) {
     slides[slideIndex-1].style.display = "block";  
     dots[slideIndex-1].className += " active";
 }
+var btnReturnMenu = document.getElementById("return-menu");
 var btnStartGame = document.getElementById("start-game");
+var btnChooseSkin = document.getElementById("choose-skin");
+
+btnReturnMenu.addEventListener("click",function() {
+    window.location.href = "index.php";
+})
+
+btnChooseSkin.addEventListener("click",function(){
+    history.go(0);
+});
+btnChooseSkin.style.display="none";
 
 btnStartGame.addEventListener("click", function() {
     var birdPath="";
@@ -121,5 +137,6 @@ btnStartGame.addEventListener("click", function() {
     else if(slideIndex==2) birdPath="yellowBird";
     else birdPath="rectangularBird";
 
-    var g = new game("canvas",birdPath);
+    var g = new game("canvas",username,birdPath);
+    btnChooseSkin.style.display ="block";
 }); 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION["username"])){
-    header("login.php");
+    header("location:login.php");
 }
 
 ?>
@@ -16,29 +16,54 @@ if(!isset($_SESSION["username"])){
     <link href="Skin.css" rel="stylesheet" type="text/css"/>
 </head>
 <style>
-  :root{
-      --bg1 : #9b59b6;
-      --bg2 : #3498db;
-      --text : #26ade4;
-  }
-  body{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background: linear-gradient(to bottom right,var(--bg1),var(--bg2));
-      width: 100vw;
-      height: 100vh;
-  }
-  #canvas {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); 
-  }
+    :root{
+        --bg1 : #9b59b6;
+        --bg2 : #3498db;
+        --text : #26ade4;
+    }
+    body{
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+        text-align: center;
+        background: linear-gradient(to bottom right,var(--bg1),var(--bg2));
+        width: 100vw;
+        height: 100vh;
+    }
+    #canvas {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+    }
+    .sender-column {
+        vertical-align: middle;
+        font-size:20px;
+        height:30px;
+        background-color:white;
+        width:100%;
+        position: fixed;
+        text-align: right;
+    }   
+    .sender-column a{
+        text-decoration:none;
+    }
+    #choose-skin{
+        bottom:30px;
+        right:50%px;
+        width:140px;
+    }
+    #choose-skin:hover{
+        cursor: pointer;
+    }
+
 
 </style>
+
 <body>
+    <div class="sender-column">
+            <strong><a href="index.php">return menu</a></strong>
+    </div>
     <div class="container" id="container">
         <form class="formLabel">
             <div class="slideshow-container">
@@ -72,7 +97,7 @@ if(!isset($_SESSION["username"])){
                   <span class="dot" onclick="currentSlide(3)"></span> 
                 </div>
             <h1>
-                スキン
+                
             </h1>
             <div class="button">
                 <button type="button" id="return-menu">
@@ -85,7 +110,13 @@ if(!isset($_SESSION["username"])){
         </form>
     </div>
     <canvas id="canvas"></canvas>
+    <button type="button" id="choose-skin" class="sender-column">
+        スキンを選ぶ
+    </button>
 </body>
+<script type="text/javascript">
+    var username = "<?php echo $_SESSION["username"]?>";
+</script>
 <script type="text/javascript" src="js/const.js"></script>
 <script type="text/javascript" src="js/bg.js"></script>
 <script type="text/javascript" src="js/bird.js"></script>

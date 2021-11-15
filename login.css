@@ -70,3 +70,8 @@ h1{
     font-size: 50px;
     margin-bottom: 30px;
 }
+#error-submit{
+    margin-top:10px;
+    color:red;
+    margin-left: 20px;
+}

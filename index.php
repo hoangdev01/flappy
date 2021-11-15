@@ -1,9 +1,10 @@
 <?php
-session_start();
-if(!isset($_SESSION["username"])){
-    header("login.php");
-}
+session_start(); 
 
+if(!isset($_SESSION["username"])){
+    header("location:login.php");
+}
+$username = $_SESSION["username"];
 ?>
 
 <!DOCTYPE html>
@@ -27,17 +28,17 @@ if(!isset($_SESSION["username"])){
     </head>
     <body>
         <div class="sender-column">
-            <strong><a href="login.html">Login</a></strong>
+            <strong><?php echo $username?></strong>
         </div>
         <div class="sender-column">
-            <a href="login.html"> Logout</a>
+            <a href="logout.php"> Logout</a>
         </div>
         <div class="container">  
             <form action="login.php" class="form-login" method="POST" role="form">   
         
                 <br><br><br><br><br><br><br>
                     <button type="submit" >
-                        <h1> <a href="play.html">プレー</a> </h1>
+                        <h1> <a href="play.php">プレー</a> </h1>
                     </button><br>
                     <button type="submit" >
                         <h1><a href="TopPoint.html">トップポイント</a></h1>
@@ -51,8 +52,6 @@ if(!isset($_SESSION["username"])){
                     <button type="submit" >
                         <h1>セッティング</h1>
                     </button>
-                            
-        
             </form>            
         </div>
     </body>
