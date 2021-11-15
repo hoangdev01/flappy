@@ -1,0 +1,53 @@
+:root{
+    --bg1 : #9b59b6;
+    --bg2 : #3498db;
+    --text : #26ade4;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom right,var(--bg1),var(--bg2));
+}
+
+.form-text{
+    width: 300px;
+    height: 500px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 40px 30px;
+}
+
+.form-text h1{
+    margin-bottom: 40px;
+}
+
+/* .form-text content{
+    background: #9b59b6;
+} */
+
+h1{
+    color: midnightblue;
+    font-size: 50px;
+    margin-bottom: 30px;
+}
+context{
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.form-text button{
+    height: 35px;
+    width: 100px;
+    margin-bottom:30px;
+    background: linear-gradient(120deg,var(--bg1),var(--bg2),var(--bg1));
+    border: none;
+    color: #fff;
+    border: radius 5px ;
+    background-size: 200%;
+    transition: 0.5s;
+}
