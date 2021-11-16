@@ -91,8 +91,6 @@ class bird{
             this.game.ctx.fillText('Score: ' + this.game.bg.score, CANVAS_WIDTH/1.5, (BG_HEIGHT/2.25));
             
             this.game.ctx.fillText('Best: ' + this.game.bg.score, CANVAS_WIDTH/1.5, (BG_HEIGHT/1.75));
-
-            this.game.ctx.fillText('Rank: ' + this.game.bg.score, CANVAS_WIDTH/3.5, BG_HEIGHT/2);
         }
     }
 

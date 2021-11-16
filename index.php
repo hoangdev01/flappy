@@ -24,14 +24,14 @@ $username = $_SESSION["username"];
         <title>Đăng nhập vào website</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="menu.css" rel="stylesheet" type="text/css"/>
+        <link href="css/menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="sender-column">
             <strong><?php echo $username?></strong>
         </div>
         <div class="sender-column">
-            <a href="logout.php"> Logout</a>
+            <a href="controller/logout.php"> Logout</a>
         </div>
         <div class="container">  
             <form action="login.php" class="form-login" method="POST" role="form">   

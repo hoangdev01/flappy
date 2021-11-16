@@ -3,6 +3,11 @@ session_start();
 if(isset($_SESSION["username"])){
     header("location:index.php");
 }
+if(isset($_SESSION["createAccountSuccess"])){
+    $msg = $_SESSION["createAccountSuccess"];
+    unset($_SESSION["createAccountSuccess"]);
+    echo "<script type='text/javascript'>alert('$msg');</script>";
+  }
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +16,7 @@ if(isset($_SESSION["username"])){
         <title>Đăng nhập vào website</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="login.css" rel="stylesheet" type="text/css"/>
+        <link href="css/login.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
 <div class="container">  

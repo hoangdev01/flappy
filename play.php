@@ -13,7 +13,7 @@ if(!isset($_SESSION["username"])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Play</title>
-    <link href="Skin.css" rel="stylesheet" type="text/css"/>
+    <link href="css/Skin.css" rel="stylesheet" type="text/css"/>
 </head>
 <style>
     :root{
@@ -114,8 +114,24 @@ if(!isset($_SESSION["username"])){
         スキンを選ぶ
     </button>
 </body>
+<!-- <?php echo $_SESSION['rank'];unset($_SESSION["rank"])?> -->
+<!-- <?php echo $_SESSION['maxScore'];unset($_SESSION["maxScore"])?> -->
 <script type="text/javascript">
     var username = "<?php echo $_SESSION["username"]?>";
+</script>
+<script type="text/javascript">
+    function getRank(){
+        // var rank = "";
+        var rank = 0;
+        return rank;
+    }
+</script>
+<script type="text/javascript">
+    function getMaxScore(){
+        // var maxScore = "";
+        var maxScore = 0;
+        return maxScore;
+    }
 </script>
 <script type="text/javascript" src="js/const.js"></script>
 <script type="text/javascript" src="js/bg.js"></script>

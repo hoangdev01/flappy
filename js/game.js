@@ -65,7 +65,8 @@ class game{
         this.bg.update();
     }
     callPHP(startTime,endTime,score) {
-        var url = "save_score.php";
+        var url = "controller/save_score.php";
+        var datashow = "";
         var form = new FormData();
         form.set('username',this.username);
         form.set('start-time', startTime);
@@ -76,8 +77,10 @@ class game{
             return response.text();
         })
         .then(function(data){
+            datashow = data;
             console.log(data);
         });
+        console.log(datashow);
     }
     
     playAudio(path) {
