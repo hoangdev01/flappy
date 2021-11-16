@@ -1,5 +1,5 @@
 <?php
- $db = mysqli_connect("localhost","root","","flappybird")
+ $db = mysqli_connect("localhost","root","","test")
 ?>
 
 <!DOCTYPE html>
@@ -18,14 +18,10 @@
                 トップ
             </h1>
             <div class="content">
-                番号  ｜  ユーザー  ｜  スコア
-                <table>
+                <table id="table-rank">
                     <thead>
                     <tr>
-                        <td align = "center"> 
-                            <span class "white text">番号  |</span>
-                        </td>
-                        <td align = "center"> 
+                        <td > 
                             <span class "white text">  ユーザー  |</span>
                         </td>
                         <td align = "center">
@@ -35,14 +31,13 @@
                     </thead>
                     <tbody>
                         <?php
-                            $sql = "select * from toppoint";
+                            $sql = "SELECT username,max(score) AS max FROM MATCH_INFO GROUP BY username ORDER BY max DESC ";
                             $result = $db -> query($sql);
                             while($row = $result -> fetch_assoc()){
                             echo"
                         <tr>
-                            <td align = 'center'>".$row['MaTopPoint']."</td>
-                            <td align = 'center'>".$row['UserName']."</td>
-                            <td align = 'center'>".$row['Score']."</td>
+                            <td align = 'center'>".$row['username']."</td>
+                            <td align = 'center'>".$row['max']."</td>
                         </tr>" ; 
                         }
                         ?>

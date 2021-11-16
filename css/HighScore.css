@@ -51,3 +51,20 @@ context{
     background-size: 200%;
     transition: 0.5s;
 }
+table, th, td {
+    border: 1px solid black;
+}
+#table-rank{
+    overflow: scroll;
+    margin: auto;
+    height: 300px;
+    border-collapse: collapse;
+}
+td {
+    border: 1px solid black;
+}
+tr {
+    height: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+}
