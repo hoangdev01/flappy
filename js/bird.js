@@ -31,8 +31,8 @@ class bird{
             this.gameOverImgLoaded = true;
         }
         this.path= "images/"+this.game.birdPath+'/up.png';
-        this.imageUp.src   = "images/"+this.game.birdPath+'/up.png'  ;
-        this.imageDown.src = "images/"+this.game.birdPath+'/down.png' ;
+        this.imageUp.src   = this.game.birdPath+'/up.png'  ;
+        this.imageDown.src = this.game.birdPath+'/down.png' ;
         this.gameOverImg.src = 'images/gameover.png';
 
         this.x = 100;
@@ -46,7 +46,8 @@ class bird{
         this.result = "";
         this.startTime = null;
         this.endTime = null;
-
+        
+        this.scorePanelY = 0;
     }
 
 
@@ -69,6 +70,7 @@ class bird{
             this.game.playAudio(this.game.dieAudio);
             this.endTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
             this.game.callPHP(this.startTime,this.endTime,this.game.bg.score);
+            this.scorePanelY = -0;
         }
         this.game.bg.checkStatus = GAME_OVER_STATUS;
     }
@@ -84,13 +86,16 @@ class bird{
         if(this.gameOverImgLoaded && this.game.bg.checkStatus == GAME_OVER_STATUS){
             this.game.ctx.textAlign = "center";
             this.game.ctx.drawImage(this.gameOverImg,CANVAS_WIDTH/2.5,BG_HEIGHT/7);
-            this.game.ctx.fillStyle='#FCA146';   
-            this.game.ctx.fillRect((CANVAS_WIDTH-SCORE_WIDTH)/2, (BG_HEIGHT-SCORE_HEIGHT)/2, SCORE_WIDTH, SCORE_HEIGHT); 
+            this.game.ctx.fillStyle='#080A4E';   
+            if(this.scorePanelY < (BG_HEIGHT-SCORE_HEIGHT)/2){
+                this.scorePanelY+=10;
+            } 
+            this.game.ctx.fillRect((CANVAS_WIDTH-SCORE_WIDTH)/2, this.scorePanelY , SCORE_WIDTH, SCORE_HEIGHT); 
             this.game.ctx.fillStyle = "white";
             this.game.ctx.font = "bold 20px Arial";
-            this.game.ctx.fillText('Score: ' + this.game.bg.score, CANVAS_WIDTH/1.5, (BG_HEIGHT/2.25));
+            this.game.ctx.fillText('SCORE: ' + this.game.bg.score, CANVAS_WIDTH/2, (BG_HEIGHT/2.1));
             
-            this.game.ctx.fillText('Best: ' + this.game.bg.score, CANVAS_WIDTH/1.5, (BG_HEIGHT/1.75));
+            this.game.ctx.fillText('BEST: ' + this.game.bg.bestScore, CANVAS_WIDTH/2, (BG_HEIGHT/1.7));
         }
     }
 

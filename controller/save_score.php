@@ -22,15 +22,6 @@ if(isset($_POST['username'])&&isset($_POST['start-time'])&&isset($_POST['end-tim
     else{
         echo "\nsuccess";
     }
-    $strQuery = "SELECT MAX(score) AS 'max' FROM MATCH_INFO WHERE id='$username'";
-    $result = $mysqli -> query($strQuery);
-    if($result->num_rows > 0){
-        $_SESSION["maxScore"] = $row["max"];
-    }
-    else{
-        echo "\nError description: " . $mysqli -> error;
-    }
-    
     $mysqli -> close();
 }
 else{

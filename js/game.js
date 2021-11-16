@@ -131,15 +131,3 @@ btnChooseSkin.addEventListener("click",function(){
     history.go(0);
 });
 btnChooseSkin.style.display="none";
-
-btnStartGame.addEventListener("click", function() {
-    var birdPath="";
-    var container = document.getElementById("container");
-    container.style.display="none"; 
-    if(slideIndex==1) birdPath="defaultBird";
-    else if(slideIndex==2) birdPath="yellowBird";
-    else birdPath="rectangularBird";
-
-    var g = new game("canvas",username,birdPath);
-    btnChooseSkin.style.display ="block";
-}); 

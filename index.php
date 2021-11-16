@@ -44,7 +44,7 @@ $username = $_SESSION["username"];
                         <h1><a href="TopPoint.html">トップポイント</a></h1>
                     </button><br>
                     <button type="submit" >
-                        <h1>スキン</h1>	
+                        <h1><a href="skin.php">スキン<a></h1>	
                     </button><br>
                     <button type="submit" >
                         <h1><a href="Guide.html">ガイド</a></h1>

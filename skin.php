@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION["username"])){
     header("location:login.php");
 }
-$skin = array();
+
 ?>
 
 <!DOCTYPE html>
@@ -15,59 +15,12 @@ $skin = array();
     <title>Play</title>
     <link href="css/Skin.css" rel="stylesheet" type="text/css"/>
 </head>
-<style>
-    :root{
-        --bg1 : #9b59b6;
-        --bg2 : #3498db;
-        --text : #26ade4;
-    }
-    body{
-        display: flex;
-        justify-content: center;
-        /* align-items: center; */
-        text-align: center;
-        background: linear-gradient(to bottom right,var(--bg1),var(--bg2));
-        width: 100vw;
-        height: 100vh;
-    }
-    #canvas {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%); 
-    }
-    .sender-column {
-        vertical-align: middle;
-        font-size:20px;
-        height:30px;
-        background-color:white;
-        width:100%;
-        position: fixed;
-        text-align: right;
-    }   
-    .sender-column a{
-        text-decoration:none;
-    }
-    #choose-skin{
-        bottom:30px;
-        right:50%px;
-        width:140px;
-    }
-    #choose-skin:hover{
-        cursor: pointer;
-    }
-
-
-</style>
 
 <body>
-    <div class="sender-column">
-            <strong><a href="index.php">return menu</a></strong>
-    </div>
     <div class="container" id="container">
         <form class="formLabel">
             <div class="slideshow-container">
-                <?php
+            <?php
                     $conn = new mysqli("localhost","root","","test");
                     // Check connection
                     if ($conn->connect_error) {
@@ -110,44 +63,38 @@ $skin = array();
             </h1>
             <div class="button">
                 <button type="button" id="return-menu">
-                    メニュー
-                </button>
-                <button type="button" id="start-game">
-                    スタート
+                    <a href="index.php" style="text-decoration:none"> メニュー</a>
                 </button>
             </div>
         </form>
     </div>
-    <canvas id="canvas"></canvas>
-    <button type="button" id="choose-skin" class="sender-column">
-        スキンを選ぶ
-    </button>
 </body>
 <script type="text/javascript">
-    var username = "<?php echo $_SESSION["username"]?>";
-</script>
-<script type="text/javascript">
-    var skinNum = "<?php echo $result->num_rows?>";
-</script>
-<script type="text/javascript" src="js/const.js"></script>
-<script type="text/javascript" src="js/bg.js"></script>
-<script type="text/javascript" src="js/bird.js"></script>
-<script type="text/javascript" src="js/game.js"></script>
+var slideIndex = 1;
+showSlides(slideIndex);
 
-<script type="text/javascript">
-btnStartGame.addEventListener("click", function() {
-    <?php $index=0;?>
-    var birdPath="<?php echo $_SESSION["username"]?>";
-    var container = document.getElementById("container");
-    container.style.display="none"; 
-    var skin = new Array();
-    skin = <?php echo json_encode($skin)?>;
-    console.log(skin);
-    birdPath=skin[slideIndex-1];
-    console.log(birdPath);
-    var g = new game("canvas",username,birdPath);
-    btnChooseSkin.style.display ="block";
-}); 
-</script>
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
 
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+}
+</script>
 </html>

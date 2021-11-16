@@ -113,6 +113,7 @@ class bg {
         this.init();
         
         this.score = 0;
+        this.bestScore=0;
     }
 
     init() {
@@ -247,12 +248,13 @@ class bg {
                 this.pipeCheck[this.current]=1;
                 this.game.playAudio(this.game.removePipeAudio);
             }
-            else {
+            else if(this.pipeCheck[this.current]!=1){
                 this.game.bird.gameOver();
             }
         }
         else if (this.game.bird.x == this.xr[this.current] + PIPE_WIDTH + BG_WIDTH + this.current * PIPE_SPACE) {
             this.score += this.scoreEachTime;
+            this.bestScore = Math.max(this.score,this.bestScore);
             this.current += 1;
             this.createPipe();
             this.game.playAudio(this.game.pointAudio);

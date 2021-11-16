@@ -30,7 +30,7 @@ const TIME_LOOP = 1;
 const GROUND_Y = 400;
 
 const SCORE_HEIGHT = 150;
-const SCORE_WIDTH = 500;
+const SCORE_WIDTH = 200;
 
 const START_STATUS = -1;
 const IN_GAME_STATUS = 0;
