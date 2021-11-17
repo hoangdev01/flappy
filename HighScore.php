@@ -18,9 +18,13 @@
                 トップ
             </h1>
             <div class="content">
+                <div id="table-block">
                 <table id="table-rank">
                     <thead>
                     <tr>
+                        <td > 
+                            <span class "white text">  ランク  |</span>
+                        </td>
                         <td > 
                             <span class "white text">  ユーザー  |</span>
                         </td>
@@ -33,9 +37,12 @@
                         <?php
                             $sql = "SELECT username,max(score) AS max FROM MATCH_INFO GROUP BY username ORDER BY max DESC ";
                             $result = $db -> query($sql);
+                            $rank=0;
                             while($row = $result -> fetch_assoc()){
+                            $rank+=1;
                             echo"
                         <tr>
+                            <td align = 'center'>".$rank."</td>
                             <td align = 'center'>".$row['username']."</td>
                             <td align = 'center'>".$row['max']."</td>
                         </tr>" ; 
@@ -43,21 +50,11 @@
                         ?>
                     </tbody>
                 </table>
+                </div>
             </div>
-            
-            <div>
-                <button type="menu">
-                    ^
-                </button>
-                <button type="menu">
-                    v
-                </button>
-            </div>
-            <div>
-                <button type="submit">
-                    バック
-                </button>
-            </div>
+            <button type="button" id="return-menu">
+                <a href="index.php" style="text-decoration:none"> メニュー</a>
+            </button>
         </form>
     </div>
     

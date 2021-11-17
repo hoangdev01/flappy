@@ -54,10 +54,12 @@ context{
 table, th, td {
     border: 1px solid black;
 }
-#table-rank{
-    overflow: scroll;
-    margin: auto;
+#table-block{
     height: 300px;
+    overflow-y: scroll;
+}
+#table-rank{
+    margin: auto;
     border-collapse: collapse;
 }
 td {
