@@ -1,7 +1,9 @@
 class game{
-    constructor(ID,username, birdPath){
+    constructor(ID,username, birdPath,skill,skillSound){
         this.canvas = document.getElementById(ID);
         this.ctx =  this.canvas.getContext('2d');
+        this.skill = skill;
+        this.skillSound = skillSound;
         this.birdPath = birdPath;
         this.username = username;
         this.canvas.width = CANVAS_WIDTH;
@@ -20,10 +22,10 @@ class game{
         this.hitAudio="sound/hit.ogg";
         this.dieAudio="sound/die.ogg";
         this.pointAudio="sound/point.ogg";
-        this.strongAudio="sound/strong.wav";
-        this.doubleScoreAudio="sound/doubleScore.wav";
-        this.slowDownTimeAudio="sound/slowDownTime.wav";
-        this.zoomOutAudio="sound/zoomout.wav";
+        this.strongAudio=this.skillSound[0];
+        this.zoomOutAudio=this.skillSound[1];
+        this.slowDownTimeAudio=this.skillSound[2];
+        this.doubleScoreAudio=this.skillSound[3];
         this.removePipeAudio="sound/removePipe.mp3";
         // this.item = new item(this);
         this.listenMouse();

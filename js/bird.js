@@ -30,7 +30,6 @@ class bird{
         this.gameOverImg.onload = () => {
             this.gameOverImgLoaded = true;
         }
-        this.path= "images/"+this.game.birdPath+'/up.png';
         this.imageUp.src   = this.game.birdPath+'/up.png'  ;
         this.imageDown.src = this.game.birdPath+'/down.png' ;
         this.gameOverImg.src = 'images/gameover.png';

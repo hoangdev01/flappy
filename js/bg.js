@@ -79,10 +79,10 @@ class bg {
         this.btnResume.src = 'images/resume.png';
 
         //skill image source
-        this.strongImage.src   = 'images/strong.png'  ;
-        this.zoomOutImage.src   = 'images/zoomout.png'  ;
-        this.slowDownImage.src   = 'images/time.webp'  ;
-        this.doubleScoreImage.src   = 'images/x2icon.png'  ;
+        this.strongImage.src   = this.game.skill[0]  ;
+        this.zoomOutImage.src   = this.game.skill[1]  ;
+        this.slowDownImage.src   = this.game.skill[2]  ;
+        this.doubleScoreImage.src   = this.game.skill[3]  ;
 
         this.skillTimeImage.src   = 'images/skillTime.png'  ;
 

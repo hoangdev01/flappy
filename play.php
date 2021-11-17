@@ -4,6 +4,9 @@ if(!isset($_SESSION["username"])){
     header("location:login.php");
 }
 $skin = array();
+$skill = array();
+$skillSound = array();
+$skinNum = 0;
 ?>
 
 <!DOCTYPE html>
@@ -86,6 +89,18 @@ $skin = array();
                         echo "<div class='text'>Default Bird</div>";
                         echo "</div>";
                       }
+                      $skinNum = $result->num_rows;
+                    } else {
+                      echo "0 results";
+                    }
+                    $sql = "SELECT * FROM SKILL";
+                    $result = $conn->query($sql);
+                    
+                    if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        $skill[]=$row["link"];
+                        $skillSound[]=$row["soundLink"];
+                      }
                     } else {
                       echo "0 results";
                     }
@@ -100,7 +115,7 @@ $skin = array();
                 
                 <div style="text-align:center">
                 <?php
-                    for ($i = 1; $i <= $result->num_rows; $i++) {
+                    for ($i = 1; $i <= $skinNum; $i++) {
                         echo "<span class='dot' onclick='currentSlide(".$i.")'></span>";
                     }
                 ?>
@@ -126,9 +141,6 @@ $skin = array();
 <script type="text/javascript">
     var username = "<?php echo $_SESSION["username"]?>";
 </script>
-<script type="text/javascript">
-    var skinNum = "<?php echo $result->num_rows?>";
-</script>
 <script type="text/javascript" src="js/const.js"></script>
 <script type="text/javascript" src="js/bg.js"></script>
 <script type="text/javascript" src="js/bird.js"></script>
@@ -141,11 +153,16 @@ btnStartGame.addEventListener("click", function() {
     var container = document.getElementById("container");
     container.style.display="none"; 
     var skin = new Array();
+    var skill = new Array();
     skin = <?php echo json_encode($skin)?>;
+    skill = <?php echo json_encode($skill)?>;
+    skillSound = <?php echo json_encode($skillSound)?>;
     console.log(skin);
+    console.log(skill);
+    console.log(skillSound);
     birdPath=skin[slideIndex-1];
     console.log(birdPath);
-    var g = new game("canvas",username,birdPath);
+    var g = new game("canvas",username,birdPath,skill,skillSound);
     btnChooseSkin.style.display ="block";
 }); 
 </script>
