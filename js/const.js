@@ -12,8 +12,8 @@ const PIPE_HEIGHT = 320;
 const PIPE_WIDTH = 52;
 const PIPE_HEIGHT_MIN = 25;
 const PIPE_HEIGHT_MAX = 250;
-const PIPE_Y_MIN = -320;
-const PIPE_Y_MAX = 120;
+const PIPE_Y_MIN = -350;
+const PIPE_Y_MAX = 150;
 const PIPE_SPEED = 0.5;
 const PIPE_SPACE = 150;
 
