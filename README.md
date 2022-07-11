@@ -2,6 +2,8 @@
 
 <h1>Flappy bird</h1>
 
+![image](https://user-images.githubusercontent.com/91477215/178225502-853c4f8a-7a6c-47f7-9280-67486ecfef42.png)
+
 <h2>メンバー</h2>
 - Dang Ba Vu Hoang (GL)<br>
 - Do Le Dang Khoa (SL)<br>
